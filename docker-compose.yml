@@ -1,0 +1,28 @@
+services:
+  ollama:
+    image: ollama/ollama:latest
+    volumes:
+      - ollama:/root/.ollama
+    # GPU (optional): uncomment on a host with the NVIDIA container toolkit
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices: [{driver: nvidia, count: all, capabilities: [gpu]}]
+
+  app:
+    build: .
+    depends_on: [ollama]
+    environment:
+      STOCKPRED_OLLAMA_BASE_URL: http://ollama:11434
+      STOCKPRED_LLM_MODEL: llama3.2
+      STOCKPRED_USER_AGENT: "stockpred/0.2 (research; contact: you@example.com)"
+    ports:
+      - "127.0.0.1:8000:8000"   # API is bound to localhost: it has no authentication
+    volumes:
+      - data:/data
+    # first run:  docker compose run --rm app ingest-prices && docker compose run --rm app build-panel && docker compose run --rm app train
+    command: ["serve", "--host", "0.0.0.0", "--port", "8000", "--paper"]
+
+volumes:
+  ollama:
+  data:

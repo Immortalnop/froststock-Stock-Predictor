@@ -1,0 +1,25 @@
+aiohttp>=3.9
+feedparser>=6.0
+yfinance>=0.2.50
+pandas>=2.1
+numpy>=1.26
+scipy>=1.11
+scikit-learn>=1.4
+lightgbm>=4.3
+statsmodels>=0.14
+arch>=7.0
+duckdb>=1.0
+pyarrow>=15
+pydantic>=2.6
+pydantic-settings>=2.2
+rapidfuzz>=3.6
+optuna>=3.6
+joblib>=1.3
+rich>=13.7
+fastapi>=0.110
+uvicorn>=0.29
+httpx>=0.27
+# dev
+pytest>=8
+pytest-asyncio>=0.23
+# optional: torch (LSTM model), transformers (FinBERT baseline)
